@@ -29,13 +29,13 @@
 					</div>
 					<div class="form_row">
 						<label>产品压缩包:</label>
-						<div class="form_input weui-uploader__input-box" style="width:100px;height:100px;">
+						<div class="form_input uploader" style="width:100px;height:100px;">
 						</div>
 					</div>
 
 					
 					<div class="form_row">
-						<input type="submit" class="form_submit" value="Submit" />
+						<input type="submit" class="form_submit" value="提交" />
 					</div> 
 					<div class="clear"></div>
 				</div>
