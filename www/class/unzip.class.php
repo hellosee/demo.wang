@@ -212,7 +212,7 @@
   //   Note that no real action is taken, if the archive does not exist it is not
   //   created. Use create() for that.
   // --------------------------------------------------------------------------------
-  function PclZip($p_zipname)
+  function __construct($p_zipname)
   {
 
     // ----- Tests the zlib
@@ -5688,55 +5688,3 @@
     }
     return $p_path;
   }
-  // --------------------------------------------------------------------------------
-
- /*
-  *只支持zip的格式压缩
-  */
-if(!isset($_GET['m']))$_GET['m']="";
-if (function_exists("m__" . $_GET['m'])) call_user_func("m__" . $_GET['m']);
-  function m__do_unzip(){
-      echo('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />');
-        if(!isset($_GET['from'])) die('<script>alert("请选择一个zip文件");window.location.href="unzip.php";</script>');
-        if(!isset($_GET['to'])) $_GET['to']="";
-        $archive = new PclZip($_GET['from']);
-        if ($archive->extract(PCLZIP_OPT_PATH, $_GET['to']) == 0) {
-                                die("Error : ".$archive->errorInfo(true));
-        }
-        die('<script>alert("解压成功");window.location.href="unzip.php";</script>');
-    //die("111");
-  
-  }
-
-
-  /**
- * 获取某个文件夹下面的所有文件
- * 
- * @param  $dir 某个文件夹所在的路径
- * @return array 
- */
-function get_file_list($dir="") {
-    $files = array();
-    if(!file_exists($dir)) return $files;
-	$key = 0;
-    if(!file_exists($dir)) return $files;
-    if ($handle = opendir($dir)) {
-        while (($file = readdir($handle)) !== false) {
-            $key++;
-            if ($file != ".." && $file != "." ) {
-                //if (is_dir($dir . "/" . $file)) {
-                    // if($file=="css" ) continue;
-                    // $files[$file] = get_file_list($dir . "/" . $file);
-                //} else {
-                    if(strstr($file,".zip")){
-                    $files[$key]['name'] = $file;
-                    $files[$key]['size'] = filesize($dir . "/" . $file);
-                    $files[$key]['update_time'] = filemtime($dir . "/" . $file); 
-                    }
-                //} 
-            } 
-        } 
-        closedir($handle);
-        return $files;
-    } 
-} 

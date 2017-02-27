@@ -30,3 +30,6 @@ create table `db_t`.`tb_product`(
 
 ALTER TABLE `db_t`.`tb_product`   
   ADD COLUMN `prourl` VARCHAR(255) DEFAULT ''  NOT NULL  COMMENT '产品展示路径' AFTER `createtime`;
+  
+  ALTER TABLE `db_t`.`tb_product`   
+  ADD COLUMN `archive` INT(1) DEFAULT 0  NOT NULL  COMMENT '是否已经解压' AFTER `prourl`;

@@ -10,6 +10,7 @@ call_mfunc();
 require_once(assign_tpl(basename(__FILE__), 'index'));
 
 function m__list(){
+
 }
 
 function m__add(){

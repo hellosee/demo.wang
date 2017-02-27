@@ -58,6 +58,7 @@ class UploadFile{
      */
     private function save($file){
         $filename = $file['savepath'].$file['savename'];
+        //$filename=iconv("UTF-8","gb2312", $filename);
         if(!$this->uploadReplace && is_file($filename)) {
             // 不覆盖同名文件
             $this->error	=	'文件已经存在！'.$filename;
@@ -73,6 +74,7 @@ class UploadFile{
             $this->error = '文件上传保存错误！';
             return false;
         }
+        //$filename=iconv("gb2312","UTF-8", $filename);
         return true;
     }
     /**
@@ -229,9 +231,9 @@ class UploadFile{
      * 文件命名 规则
      */
     private function getSaveName($file){
-       //$saveName = md5(uniqid()).'.'.$file['extension'];
-       // return $saveName;
-       return $file['name'];
+        $saveName = md5(uniqid()).'.'.$file['extension'];
+        return $saveName;
+       //return $file['name'];
     }
 
     /**

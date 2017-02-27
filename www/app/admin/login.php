@@ -21,7 +21,7 @@ function m__dologin(){
 	if(!$password){die ('{"code":"1","msg":"请输入密码","data":""}');}
 	
 	//通过用户名查询账号
-	$user = $dbm->find(DB_DBNAME.'.tb_member',"id,username,password,salt","username='{$username}'");
+	$user = $dbm->where('username',$username)->getOne('tb_member',"id,username,password,salt");
 	if($user && is_array($user)){
 		if($password === $user['password']){
 			session_open();
@@ -41,6 +41,14 @@ function m__dologin(){
 	
 	
 	
+}
+
+function m__logout(){
+	session_open();
+	$_SESSION['uid'] = null;
+	$_SESSION['user'] = null;
+	session_close();
+	header('Location: login.php');
 }
 
 

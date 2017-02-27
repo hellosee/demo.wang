@@ -1,10 +1,6 @@
 <?php require_once(assign_tpl_inc('inc.header.php'));?>
 <div id="panelwrap">
-  	<div class="header">
-		<div class="title"><a href="#">用户支撑平台</a></div>
-		<div class="header_right">欢迎 Admin, <a href="#" class="settings">Settings</a> <a href="#" class="logout">Logout</a> </div>
-    </div>
-
+	<?php require_once(assign_tpl_inc('inc.sub.header.php'));?>
     <hr style="border:0px;width: 100%;height: 5px;background-color: #edcd66;clear: both;float: left;" />
 	<form action="javascript:void(0)" name="pro_form" data-submit="adp.php?m=addpro" onsubmit="pro_submit(this)">
     <div class="center_content">  
@@ -39,7 +35,7 @@
 						</div>
 					</div>
 
-					
+					<input type="text" id="archive" name="archive" value="1" style="display:none" />
 					<div class="form_row">
 						<input type="submit" class="form_submit" value="提交" />
 					</div> 
@@ -51,10 +47,7 @@
 		<?php require_once(assign_tpl_inc('inc.menu.php'));?>      
 		<div class="clear"></div>
     </div> <!--end of center_content-->
-	<div class="footer">
-		Panelo - Free Admin Collect from 
-		<a href="http://h2design.taobao.com/" title="氢设计" target="_blank">氢设计</a>
-	</div>
+	<div class="footer"></div>
 </div>
 <script src="<?php echo __JS__;?>/jquery.ajaxupload.js" type="text/javascript" charset="utf-8"></script>
 <script src="<?php echo __JS__;?>/layer/layer.js" type="text/javascript" charset="utf-8"></script>
@@ -66,6 +59,7 @@
 		var pro_name = proObj.pro_name.value;
 		var pro_category = proObj.pro_category.value;
 		var profileurl = proObj.profileurl.value;
+		var archive = proObj.archive.value;
 		if(pro_name == ''){ alert('请输入产品名称');proObj.pro_name.focus(); return; }
 		if(pro_category == ''){ alert('请选择产品分类'); proObj.pro_category.focus(); return; }
 		if(profileurl == ''){ alert('请上传产品压缩包（只支持zip格式）'); proObj.profileurl.focus(); return; }
@@ -74,10 +68,14 @@
 			url:$(obj).attr('data-submit'),
 			async:true,
 			dataType:'json',
-			data:{name:pro_name,cid:pro_category,profile:profileurl},
+			data:{name:pro_name,cid:pro_category,profile:profileurl,archive:archive},
 			beforeSend:function(xhr){index = layer.msg('信息提交中....');},
 			success:function(data){
-				console.log(data);
+				layer.confirm(data.msg, {
+					btn: ['确定'] //按钮
+				}, function(){
+					window.location.href=window.location.href;
+				});
 
 			},
 			complete:function(XHR, TS){layer.close(index);},
@@ -99,12 +97,13 @@
 			},
 			success: function (data, status, xhr) {
 				var d = JSON.parse(data);
-				var dd = d.data[0];
+				var dd = d.data;
 				if(d.code){
 					layer.alert(d.data,{icon: 2});
 				} else {
 					$("#profileurl").val(dd.savename);
 					$("#profileurl").css("display",'inline');
+					$("#archive").val(dd.archive);
 				}
 				layer.close(index);
 				console.log(data);

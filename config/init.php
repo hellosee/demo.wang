@@ -42,17 +42,10 @@ $_GET['tpl'] = isset($_GET['tpl']) ? trim($_GET['tpl']) : ''; //模板参数
 
 
 //初始化数据库
-$dbm = database::init();
+$dbm = new MysqliDb(DB_HOST,DB_USERNAME,DB_PASS,DB_DBNAME);
+if(!$dbm) die("Database error");
 
-/*
-$V = new Vars($global_vars);//变量类
-$U = new User($dbm);//用户类
-$T = new Tree($dbm);//树类
-$Q = new Quan($dbm);//圈子类
-$P = new Page($dbm);//微主页类
-$N = new Number($dbm);//微信大全类
-$C = new Comm($dbm);//公共操作方法
 
-*/
+
 //JS防止缓存或者上传需要标识
 $timestamp=time();

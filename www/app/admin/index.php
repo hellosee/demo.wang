@@ -15,19 +15,22 @@ function m__list(){
 	//查询分类
 	$params = array(
 		'table_name' => DB_DBNAME.'.tb_product',
-		'fields'     => 'id,cid,name,createtime',
+		'fields'     => 'id,cid,name,createtime,archive',
 		'suffix'     => 'order by createtime desc ',
 		'count'      => 0,
 	);
-	$lists = $dbm->single_query($params);
-	if(!empty($lists['list'])){
-		foreach($lists['list'] as $_k => $_v){
-			$data[$_k]['cname'] = $dbm->find(DB_DBNAME.'.tb_category', 'cname', "id='{$_v['cid']}'");
+	$lists = $dbm->orderBy("createtime")->get ("tb_product", null, "id,cid,name,createtime,archive");
+
+	if(!empty($lists)){
+		foreach($lists as $_k => $_v){
+			$data[$_k]['id'] = $_v['id'];
+			$categoryTmp = $dbm->where ("id", $_v['cid'])->getOne('tb_category', 'cname');
+			$data[$_k]['cname'] = $categoryTmp['cname'];
 			$data[$_k]['pname'] = $_v['name'];
-			$data[$_k]['createtime'] = $_v['createtime'];
+			$data[$_k]['archive'] = $_v['archive'];
+			$data[$_k]['createtime'] = date("Y-m-d H:i:s",$_v['createtime']);
 		}
 	}
 }
-
 
 ?>
