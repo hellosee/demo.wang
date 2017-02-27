@@ -14,14 +14,13 @@
 					<thead>
 						<tr>
 							<th></th>
-							<th>Product</th>
-							<th>Details</th>
-							<th>Price</th>
-							<th>Date</th>
-							<th>Category</th>
-							<th>User</th>
-							<th>Edit</th>
-							<th>Delete</th>
+							<th>ID</th>
+							<th>产品名称</th>
+							<th>产品分类</th>
+							<th>上传时间</th>
+							<th>查看</th>
+							<th>编辑</th>
+							<th>删除</th>
 						</tr>
 					</thead>
 					<tfoot>
@@ -30,6 +29,9 @@
 						</tr>
 					</tfoot>
 					<tbody>
+					<?php
+
+					?>
 						<tr class="odd">
 							<td><input type="checkbox" name="" /></td>
 							<td>Box Software</td>

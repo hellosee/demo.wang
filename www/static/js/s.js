@@ -25,5 +25,8 @@ var s = {
             error: function(xhr, type, errorThrown) {}
         });
 		return false;
+	},
+	"addproduct":function(){
+
 	}
 };

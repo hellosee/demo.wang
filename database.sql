@@ -27,3 +27,6 @@ create table `db_t`.`tb_product`(
 	`createtime` int(10) not null default 0 comment '创建时间',
 	primary key(`id`)
 )engine=myisam default charset=utf8 comment='产品表';
+
+ALTER TABLE `db_t`.`tb_product`   
+  ADD COLUMN `prourl` VARCHAR(255) DEFAULT ''  NOT NULL  COMMENT '产品展示路径' AFTER `createtime`;
