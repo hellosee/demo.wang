@@ -78,7 +78,7 @@ a:hover {
 	display: block;
 	margin-left: 1px;
 	width: 166px;
-	padding-top: 10px;
+	padding-top: 6px;
 	height: 20px;
 	text-align: center
 }
@@ -100,10 +100,18 @@ a.brand_detail span {
 	display:table;
 	margin: 0 auto;
 	clear: both;
+	line-height: 50px;
+	font-size:20px;
 }
-.header ul, .header ul li {
+.header ul li {
+	width:50px;
+	margin-left: 10px;
+	float:left;
 	list-style: none;
 	margin: 0px;
 	padding: 0px;
 	list-style-type: none;
+}
+.header .selected{
+	color:rgb(245, 180, 17);
 }

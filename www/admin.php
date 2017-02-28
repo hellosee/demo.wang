@@ -1,2 +1,2 @@
 <?php
-dirname(__FILE__) . '/app/admin/index.php'
+header("Location:/app/admin/index.php");
